@@ -69,7 +69,7 @@ class MainClass {
   }
   public static void Back()
   {
-    Console.WriteLine("'Back' to return");
+    Console.WriteLine("'Back' to go back and choose a command.");
     string bacK = Console.ReadLine();
     if (bacK == "back")
     {
