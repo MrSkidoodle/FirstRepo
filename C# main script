@@ -1,0 +1,231 @@
+using System;
+
+class MainClass {
+  public static void Main (string[] args) 
+  {
+    Console.Clear();
+    Login();
+  }
+  public static void Login(){
+    
+    Console.WriteLine("insert login:");
+    string login = Console.ReadLine();
+    Console.WriteLine("insert password:");
+    string password = Console.ReadLine();
+    Console.Clear();
+    if (login == "admin")
+    {
+      if (password == "root")
+      {
+        mainMenu();
+      }
+      else
+      {
+        incorrectPassword();
+      }
+    }
+    else
+    {
+      incorrectPassword();
+    }
+  }
+  public static void incorrectPassword()
+  {
+    Console.WriteLine("Incorrect combination/User does not exist");
+    Login();
+  }
+  public static void mainMenu()
+  {
+    Console.Clear();
+    Console.WriteLine("type Help for more options");
+    string answer = Console.ReadLine();
+    if (answer == "help")
+    {
+      Help();
+    }
+    else if (answer == "health")
+    {
+      Health();
+    }
+    else if (answer == "time")
+    {
+      Time();
+    }
+    else if (answer == "logout")
+    {
+      Login();
+    }
+
+  }
+  public static void Help()
+  {
+    Console.Clear();
+    Console.WriteLine("'health' for enemy debug menu");
+    Console.WriteLine("'time' to get the time");
+    Console.WriteLine("'logout' to logout");
+    Console.WriteLine("More coming soon");
+    
+    Back();
+  }
+  public static void Back()
+  {
+    Console.WriteLine("'Back' to return");
+    string bacK = Console.ReadLine();
+    if (bacK == "back")
+    {
+      mainMenu();
+    }
+    else
+    {
+      Console.WriteLine("Invalid combination");
+      Back();
+    }
+  }
+    public static void Back2()
+  {
+    Console.WriteLine("'update' to update the time"); Console.WriteLine("'Back' to return");
+    string bacK = Console.ReadLine();
+    if (bacK == "back")
+    {
+      mainMenu();
+    }
+    else if (bacK == "update")
+    {
+      Time();
+    }
+    else
+    {
+      Console.WriteLine("Invalid combination");
+      Back();
+    }
+    
+  }
+  public static void Health()
+  {
+    Console.Clear();
+    Console.WriteLine("'setdamage' set the ammount of damage to be dealt, default is 0"); 
+    Console.WriteLine("'damage' deal the ammount of damage set to the enemy");
+    string answer = Console.ReadLine();
+    if (answer == "setdamage")
+    {
+      Damageentry();
+    }
+    else if (answer == "damage")
+    {
+      Console.WriteLine("damage value not assigned yet. type 'setdamage' to assign a value");
+      string answer2 = Console.ReadLine();
+      if (answer2 == "setdamage")
+      {
+        Damageentry();
+      }
+      else
+      {
+        Damageloop();
+      }
+    }
+    else if (answer == "constantdamage")
+    {
+      Console.WriteLine("damage value not assigned yet. type 'setdamage' to assign a value");
+      string answer2 = Console.ReadLine();
+      if (answer2 == "setdamage")
+      {
+        Damageentry();
+      }
+      else
+      {
+        Damageloop();
+      }
+    }
+  }
+  public static void Damageloop()
+  {
+    Console.WriteLine("invalid command");
+    string answer = Console.ReadLine();
+    if (answer == "setdamage")
+    {
+      Damageentry();
+    }
+    else
+    {
+      Damageloop();
+    }
+  }
+  public static void Damageentry()
+  {
+    Console.WriteLine("insert damage value 1-100:");
+    MainClass.damage = Convert.ToInt32(Console.ReadLine());
+    Damage();
+  }
+  public static int damage = 0;
+  public static void Damage()
+  {
+    int enemyhealth = 100;
+
+    
+    
+    if (MainClass.damage > 100)
+    {
+      Console.WriteLine("input a number lower than 100");
+      Damageloop2();
+    }
+    else
+    {
+      Console.WriteLine("now type 'damage' or 'constantdamage' to output the remaining health");
+      string answer = Console.ReadLine();
+      if (answer == "damage")
+      {
+        Console.Clear();
+        enemyhealth = enemyhealth - MainClass.damage;
+        Console.WriteLine(enemyhealth);
+        Back();
+      }
+      else if (answer == "setdamage")
+      {
+        Damageentry();
+      }
+      else if (answer == "constantdamage")
+      {
+        Console.Clear();
+        while (enemyhealth > 0)
+        {
+          enemyhealth = enemyhealth - damage;Console.WriteLine(enemyhealth);
+        }
+        if (enemyhealth < 0)
+        {
+          enemyhealth = 0;
+        }
+        else if (enemyhealth == 0)
+        {
+          Back();
+        }
+      }
+    }
+   
+  }
+  public static void Damageloop2()
+  {
+    int answer = Convert.ToInt32(Console.ReadLine());
+    if (answer > 100)
+    {
+      Console.WriteLine("input a number lower than 100");
+      Damageloop2();
+    }
+    else
+    {
+      MainClass.damage = answer;
+      Damage();
+    }
+  }
+  public static void ConstDamage()
+  {
+    
+  }
+  public static void Time()
+  {
+    Console.Clear();
+    DateTime machinetime = DateTime.Now;
+    DateTime nowTime = machinetime.AddHours(2);
+    Console.WriteLine(nowTime.ToString("F")); 
+    Back2();
+  }
+}
